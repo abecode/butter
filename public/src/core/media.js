@@ -572,7 +572,7 @@
               popcornOptions: _popcornOptions,
               controls: _popcornWrapper.popcorn ? _popcornWrapper.popcorn.controls() : false,
               tracks: exportJSONTracks,
-              clipData: _clipData
+              clipData: ""//_clipData
             };
           },
           set: function( importData ){
