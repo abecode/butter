@@ -1,0 +1,17 @@
+{
+  "database": {
+    "database": "popcorn",
+    "username": "dev",
+    "password": "gresMyPost_G",
+    "options": {
+      "logging": false,
+      "dialect": "postgres",
+      "host": "localhost",
+      "port": "5432",
+      "define": {
+        "charset": "utf8",
+        "collate": "utf8_general_ci"
+      }
+    }
+  }
+}
