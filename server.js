@@ -114,6 +114,8 @@ app.configure( function() {
     })
     .use( app.router );
 
+
+
   // File Store types and options come from JSON config file.
   stores.publish = setupStore( config.publishStore );
   stores.crash = setupStore( config.crashStore );
@@ -390,3 +392,29 @@ app.listen( config.PORT, function() {
   console.log( 'HTTP Server started on ' + APP_HOSTNAME );
   console.log( 'Press Ctrl+C to stop' );
 });
+
+function logErrors(err, req, res, next) {
+  console.log("czzzzzzzzz");
+  console.error("err.stack");
+  next(err);
+}
+
+function clientErrorHandler(err, req, res, next) {
+  if (req.xhr) {
+    console.log("czzzzzzzzz");
+    res.send(500, { error: 'Something blew up!' });
+  } else {
+    console.log("czzzzzzzzz");
+    next(err);
+  }
+}
+
+function errorHandler(err, req, res, next) {
+  console.log("czzzzzzzzz");
+  res.status(500);
+  res.render('error cz', { errorz: err });
+}
+
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
