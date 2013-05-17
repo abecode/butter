@@ -166,8 +166,9 @@
        * a user's extra settings.
        */
       this.override = function( configuration ){
+        var id =  __id - 1;
         var configA = configObject,
-            configB = __config[ configuration.id ];
+            configB = __config[ "config-" + id ];//configuration.id was not working in chrome canary
 
         for( var propName in configB ){
           if( configB.hasOwnProperty( propName ) ){
