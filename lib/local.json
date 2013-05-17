@@ -1,6 +1,6 @@
 {
   "database": {
-    "database": "popcorn",
+    "database": "liveriotweb",
     "username": "dev",
     "password": "gresMyPost_G",
     "options": {
