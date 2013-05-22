@@ -37,7 +37,8 @@ define( [ "util/xhr" ], function( xhr ) {
     };
 
     function whoami( callback ) {
-      xhr.get( "/api/whoami", function( response ) {
+      
+      xhr.get( "http://localhost:3000/api/v1/tokens/whoami", function( response ) {
         if ( response.status === "okay" ) {
           authenticated = true;
           email = response.email;
