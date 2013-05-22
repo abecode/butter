@@ -32,7 +32,8 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
         // Interval for backups, starts first time user clicks Save.
         _backupInterval = -1,
 
-        _thumbnail = "/resources/icons/fb-logo.png";
+        _thumbnail = "/resources/icons/fb-logo.png",
+        _eventId, _artistId, _songId;
 
     function invalidate() {
       // Project is dirty, needs save, backup
@@ -120,6 +121,39 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
         },
         get: function() {
           return _thumbnail;
+        },
+        enumerable: true
+       },
+
+       "eventId": {
+        set: function( val ) {
+          _eventId = val;
+          invalidate();
+        },
+        get: function() {
+          return _eventId;
+        },
+        enumerable: true
+       },
+
+       "artistId": {
+        set: function( val ) {
+          _artistId = val;
+          invalidate();
+        },
+        get: function() {
+          return _artistId;
+        },
+        enumerable: true
+       },
+
+       "songId": {
+        set: function( val ) {
+          _songId = val;
+          invalidate();
+        },
+        get: function() {
+          return _songId;
         },
         enumerable: true
        },
@@ -259,6 +293,18 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
         _remixedFrom = json.remixedFrom;
       }
 
+      if (json.eventId){
+        _eventId = json.eventId;
+      }
+
+      if (json.artistId){
+        _artistId = json.artistId;
+      }
+
+      if (json.songId){
+        _songId = json.songId;
+      }
+
       targets = json.targets;
       if ( targets && Array.isArray( targets ) ) {
         for ( i = 0, l = targets.length; i < l; ++i ) {
@@ -321,6 +367,9 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
       data.author = _author;
       data.description = _description;
       data.thumbnail = _thumbnail;
+      data.eventId = _eventId;
+      data.artistId = _artistId;
+      data.songId = _songId;
       data.backupDate = Date.now();
       try {
         __butterStorage.setItem( "butter-backup-project", JSON.stringify( data ) );
@@ -361,7 +410,10 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
         description: _description,
         thumbnail: _thumbnail,
         data: _this.data,
-        remixedFrom: _remixedFrom
+        remixedFrom: _remixedFrom,
+        eventId: _eventId,
+        artistId: _artistId,
+        songId: _songId
       };
 
       // Save to local storage first in case network is down.

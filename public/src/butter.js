@@ -835,20 +835,26 @@ window.Butter = {
        * @param {Function} finishedCallback: Callback to be called when data loading has completed (successfully or not).
        */
       function attemptDataLoad( finishedCallback ) {
-        var savedDataUrl,
+        var savedDataUrl, eventId, artistId, songId,
             project = new Project( _this );
 
         // see if savedDataUrl is in the page's query string
         window.location.search.substring( 1 ).split( "&" ).forEach(function( item ){
           item = item.split( "=" );
-          if ( item && item[ 0 ] === "savedDataUrl" ) {
-            savedDataUrl = item[ 1 ];
+          if ( item ) {
+            if(item[ 0 ] === "savedDataUrl" )
+              savedDataUrl = item[ 1 ];
+            else if(item[ 0 ] === "eventId")
+              eventId = item[1];
+            else if(item[ 0 ] === "artistId")
+              artistId = item[1];
+            else if(item[ 0 ] === "songId")
+              songId = item[1];
           }
         });
 
         function doImport( savedData ) {
           project.import( savedData );
-
           if ( savedData.tutorial ) {
             Tutorial.build( _this, savedData.tutorial );
           }
@@ -862,6 +868,10 @@ window.Butter = {
             // if previous attempt failed, try loading data from the savedDataUrl value in the config
             loadFromSavedDataUrl( _config.value( "savedDataUrl" ), function( savedData ) {
               if ( savedData ) {
+                savedData.eventId = eventId;
+                savedData.artistId = artistId;
+                savedData.songId = songId;
+
                 doImport( savedData );
               }
               finishedCallback( project );

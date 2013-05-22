@@ -113,6 +113,9 @@ module.exports = function routesCtor( app, Project, filter, sanitizer,
       projectJSON.publishUrl = utils.generatePublishUrl( doc.id );
       projectJSON.iframeUrl = utils.generateIframeUrl( doc.id );
       projectJSON.remixedFrom = doc.remixedFrom;
+      projectJSON.eventId = doc.event_id;
+      projectJSON.artistId = doc.artist_id;
+      projectJSON.songID = doc.song_id;
       res.json( projectJSON );
     });
   });
@@ -199,11 +202,14 @@ module.exports = function routesCtor( app, Project, filter, sanitizer,
     var files;
 
     var projectData = req.body;
-
     if ( req.body.id ) {
       files = datauri.filterProjectDataURIs( projectData.data, utils.generateDataURIPair );
 
-      Project.update( { email: req.session.email, id: req.body.id, data: projectData },
+      Project.update( { email: req.session.email, id: req.body.id, 
+                        data: projectData, 
+                        event_id: req.body.eventId,
+                        artist_id: req.body.artistId,
+                        song_id: req.body.songID },
                       function( err, doc, imagesToDestroy ) {
         if ( err ) {
           res.json( { error: err }, 500 );
@@ -233,7 +239,12 @@ module.exports = function routesCtor( app, Project, filter, sanitizer,
     } else {
       files = datauri.filterProjectDataURIs( projectData.data, utils.generateDataURIPair );
 
-      Project.create( { email: req.session.email, data: projectData }, function( err, doc ) {
+      Project.create( { email: req.session.email, 
+                        data: projectData, 
+                        event_id: req.body.eventId,
+                        artist_id: req.body.artistId,
+                        song_id: req.body.songID
+                      }, function( err, doc ) {
         if ( err ) {
           res.json( { error: err }, 500 );
           metrics.increment( 'error.save' );
