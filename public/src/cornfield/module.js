@@ -59,7 +59,7 @@ define( [ "util/xhr" ], function( xhr ) {
 
       xhr.post( "/api/thisisme", data, function( response ) {
         if ( response.status === "okay" ) {
-          console.log('/api/thisme winning');
+          //console.log('/api/thisme winning');
         }
       });
     }
