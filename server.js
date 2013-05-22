@@ -392,7 +392,7 @@ app.listen( config.PORT, function() {
   console.log( 'HTTP Server started on ' + APP_HOSTNAME );
   console.log( 'Press Ctrl+C to stop' );
 });
-
+/* logging attemps
 function logErrors(err, req, res, next) {
   console.log("czzzzzzzzz");
   console.error("err.stack");
@@ -418,3 +418,4 @@ function errorHandler(err, req, res, next) {
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
+*/
