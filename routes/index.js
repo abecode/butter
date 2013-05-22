@@ -31,6 +31,12 @@ module.exports = function routesCtor( app, Project, filter, sanitizer,
     }
   });
 
+  app.post('/api/thisisme', function(req,res){
+    req.session.email = req.body.email;
+    res.send( 200 );
+  });
+
+
   // Strip away project data, email, etc.
   function pruneSearchResults( results ) {
     return results.map( function( result ) {

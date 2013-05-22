@@ -37,7 +37,7 @@ define( [ "util/xhr" ], function( xhr ) {
     };
 
     function whoami( callback ) {
-      
+
       xhr.get( "http://localhost:3000/api/v1/tokens/whoami", function( response ) {
         if ( response.status === "okay" ) {
           authenticated = true;
@@ -45,9 +45,21 @@ define( [ "util/xhr" ], function( xhr ) {
           username = response.username;
           name = response.name;
         }
-
+        thisisme();
         if ( callback ) {
           callback( response );
+        }
+      });
+    }
+
+    function thisisme() {
+      var data = {
+        email: email
+      };
+
+      xhr.post( "/api/thisisme", data, function( response ) {
+        if ( response.status === "okay" ) {
+          console.log('/api/thisme winning');
         }
       });
     }
