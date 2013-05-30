@@ -882,6 +882,7 @@ window.Butter = {
           }
           else {
             // otherwise, attempt import
+            savedData.frameHost = frameHost;
             doImport( savedData );
             finishedCallback( project );
           }
