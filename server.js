@@ -388,7 +388,8 @@ app.get( '/dashboard', filter.isStorageAvailable, function( req, res ) {
 
 app.get( '/healthcheck', routes.api.healthcheck );
 
-app.listen( config.PORT, function() {
+var port = process.env.PORT || config.PORT;
+app.listen( port, function() {
   console.log( 'HTTP Server started on ' + APP_HOSTNAME );
   console.log( 'Press Ctrl+C to stop' );
 });
