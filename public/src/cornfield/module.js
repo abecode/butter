@@ -37,8 +37,8 @@ define( [ "util/xhr" ], function( xhr ) {
     };
 
     function whoami( callback ) {
-
-      xhr.get( "http://localhost:3000/api/v1/tokens/whoami", function( response ) {
+      var railsApp = butter.config.RAILS_APP || "http://chaos.liveriot.net";
+      xhr.get( railsApp + "/api/v1/tokens/whoami", function( response ) {
         if ( response.status === "okay" ) {
           authenticated = true;
           email = response.email;

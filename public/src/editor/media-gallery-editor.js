@@ -314,7 +314,8 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
     // and every time after it is saved.
     var clips = _media.clipData,
         clip;
-    xhr.get( "http://localhost:3000/api/v1/events/11/artist/5", loadAvailableMedia );
+    var railsApp = butter.config.RAILS_APP || "http://chaos.liveriot.net";
+    xhr.get( railsApp + "/api/v1/events/11/artist/5", loadAvailableMedia );
     for ( var key in clips ) {
       if ( clips.hasOwnProperty( key ) ) {
         clip = clips[ key ];
