@@ -33,7 +33,7 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
         _backupInterval = -1,
 
         _thumbnail = "/resources/icons/fb-logo.png",
-        _eventId, _artistId, _songId;
+        _eventId, _artistId, _songId, _frameHost;
 
     function invalidate() {
       // Project is dirty, needs save, backup
@@ -121,6 +121,13 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
         },
         get: function() {
           return _thumbnail;
+        },
+        enumerable: true
+       },
+
+       "frameHost": {
+        get: function() {
+          return _frameHost;
         },
         enumerable: true
        },
@@ -303,6 +310,10 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
 
       if (json.songId){
         _songId = json.songId;
+      }
+
+      if (json.frameHost){
+        _frameHost = json.frameHost;
       }
 
       targets = json.targets;

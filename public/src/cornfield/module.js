@@ -37,7 +37,7 @@ define( [ "util/xhr" ], function( xhr ) {
     };
 
     function whoami( callback ) {
-      var railsApp = butter.config.RAILS_APP || "http://chaos.liveriot.net";
+      var railsApp = butter.project.frameHost || "http://localhost:3000";
       xhr.get( railsApp + "/api/v1/tokens/whoami", function( response ) {
         if ( response.status === "okay" ) {
           authenticated = true;

@@ -835,7 +835,7 @@ window.Butter = {
        * @param {Function} finishedCallback: Callback to be called when data loading has completed (successfully or not).
        */
       function attemptDataLoad( finishedCallback ) {
-        var savedDataUrl, eventId, artistId, songId,
+        var savedDataUrl, eventId, artistId, songId, frameHost,
             project = new Project( _this );
 
         // see if savedDataUrl is in the page's query string
@@ -850,6 +850,8 @@ window.Butter = {
               artistId = item[1];
             else if(item[ 0 ] === "songId")
               songId = item[1];
+            else if(item[ 0 ] === "frameHost")
+              frameHost = item[1];
           }
         });
 
@@ -871,7 +873,8 @@ window.Butter = {
                 savedData.eventId = eventId;
                 savedData.artistId = artistId;
                 savedData.songId = songId;
-
+                savedData.frameHost = frameHost;
+                
                 doImport( savedData );
               }
               finishedCallback( project );
