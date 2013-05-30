@@ -295,8 +295,8 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
         clip = clips[ key ];
         
           
-          clip.thumbnail = document.createElement( "video" );
-          clip.thumbnail.src =  clip.source  ;
+          clip.thumbnail = document.createElement( "img" );
+          clip.thumbnail.src =  clip.poster  ;
           clip.thumbnail.poster =  clip.poster  ;
           addElements( clip );
       }
@@ -321,7 +321,7 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
         clip = clips[ key ];
         if ( typeof clip === "object" ) {
           
-          clip.thumbnail = document.createElement( "video" );
+          clip.thumbnail = document.createElement( "img" );
           clip.thumbnail.src =  clip.source  ;
           addElements( clip );
         } else if ( typeof clip === "string" ) {
