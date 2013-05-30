@@ -304,6 +304,9 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
       if ( clips.hasOwnProperty( key ) ) {
         clip = clips[ key ];
         if ( typeof clip === "object" ) {
+          
+          clip.thumbnail = document.createElement( "video" );
+          clip.thumbnail.src =  clip.source  ;
           addElements( clip );
         } else if ( typeof clip === "string" ) {
           // Load projects saved with just the url the old way.
