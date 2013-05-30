@@ -3,8 +3,8 @@
  * obtain one at https://raw.github.com/mozilla/butter/master/LICENSE */
 
 define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/editor",
- "util/time", "util/dragndrop", "text!layouts/media-editor.html" ],
-  function( LangUtils, URI, KeysUtils, MediaUtils, Editor, Time, DragNDrop, EDITOR_LAYOUT ) {
+ "util/time", "util/dragndrop", "text!layouts/media-editor.html","util/xhr" ],
+  function( LangUtils, URI, KeysUtils, MediaUtils, Editor, Time, DragNDrop, EDITOR_LAYOUT,xhr ) {
 
   var _parentElement =  LangUtils.domFragment( EDITOR_LAYOUT,".media-editor" ),
       _addMediaTitle = _parentElement.querySelector( ".add-new-media" ),
@@ -289,6 +289,21 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
     }
   }
 
+  function loadAvailableMedia(clips){
+    for ( var key in clips ) {
+      if ( clips.hasOwnProperty( key ) ) {
+        clip = clips[ key ];
+        
+          
+          clip.thumbnail = document.createElement( "video" );
+          clip.thumbnail.src =  clip.source  ;
+          clip.thumbnail.poster =  clip.poster  ;
+          addElements( clip );
+      }
+    }
+
+  }
+
   Editor.register( "media-editor", null, function( rootElement, butter ) {
     rootElement = _parentElement;
     _this = this;
@@ -299,7 +314,7 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
     // and every time after it is saved.
     var clips = _media.clipData,
         clip;
-
+    xhr.get( "http://localhost:3000/api/v1/events/11/artist/5", loadAvailableMedia );
     for ( var key in clips ) {
       if ( clips.hasOwnProperty( key ) ) {
         clip = clips[ key ];
