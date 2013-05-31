@@ -186,7 +186,7 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
 
     thumbnailBtn.addEventListener( "click", addEvent, false );
 
-    _galleryList.insertBefore( el, _galleryList.firstChild );
+    _galleryList.appendChild( el);
 
     if ( _this.scrollbar ) {
       _this.scrollbar.update();
