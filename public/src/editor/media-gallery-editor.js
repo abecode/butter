@@ -131,6 +131,7 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
     el.querySelector( ".mg-type" ).classList.add( data.type.toLowerCase() + "-icon" );
     el.querySelector( ".mg-type-text" ).innerHTML = data.type;
     el.querySelector( ".mg-duration" ).innerHTML = Time.toTimecode( data.duration, 0 );
+    el.querySelector( ".mg-starts-at" ).innerHTML = data.start_time;
     if ( data.type === "HTML5" ) {
       thumbnailImg = data.thumbnail;
     } else {
