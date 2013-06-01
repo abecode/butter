@@ -152,7 +152,7 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
           end = data.start_time + data.duration,
           playWhenReady = false,
           trackEvent;
-
+       
       function addTrackEvent() {
         var popcornOptions = {
           source: URI.makeUnique( data.source ).toString(),
@@ -162,7 +162,9 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
           from: data.from || 0,
           title: data.title,
           duration: data.duration,
-          hidden: data.hidden || false
+          hidden: data.hidden || false,
+          mute: !data.is_audio,
+          hidden: data.is_audio
         };
 
         trackEvent = _butter.generateSafeTrackEvent( "sequencer", popcornOptions );
