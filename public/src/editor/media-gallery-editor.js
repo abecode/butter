@@ -148,8 +148,8 @@ define( [ "util/lang", "util/uri", "util/keys", "util/mediatypes", "editor/edito
     }
 
     function addEvent() {
-      var start = _butter.currentTime,
-          end = start + data.duration,
+      var start = data.start_time,//_butter.currentTime,
+          end = data.start_time + data.duration,
           playWhenReady = false,
           trackEvent;
 
